@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beatriz e Welerson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f4f4f4;
+      background-image: linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.02) 75%, transparent 75%, transparent);
+      background-size: 50px 50px;
+      color: #292323;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background: linear-gradient(180deg, #ffffff, #f0f0f0);
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(21, 43, 248, 0.1);
+      border-radius: 10px;
+      opacity: 0;
+      animation: fadeIn 1s ease-in forwards, gradientShift 3s ease-in-out infinite;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes gradientShift {
+      0% { background: linear-gradient(180deg, #ffffff, #f0f0f0); }
+      50% { background: linear-gradient(180deg, #f0f0f0, #ffffff); }
+      100% { background: linear-gradient(180deg, #ffffff, #f0f0f0); }
+    }
+    .header h1 {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8em;
+      color: #555;
+    }
+    .header p {
+      font-size: 1.2em;
+      color: #777;
+    }
+    .buttons {
+      margin-top: 30px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 1.1em;
+      color: #fff;
+      background-color: #666;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    .btn:hover {
+      background-color: #555;
+      transform: scale(1.05);
+      animation-play-state: paused;
+    }
+    .pix-section, .story-section {
+      margin-top: 50px;
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .pix-section.visible, .story-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pix-section h2, .story-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      color: #555;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+      transition: color 0.5s ease;
+    }
+    .pix-section h2::after, .story-section h2::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(to right, #666, #f0f0f0);
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .pix-section.visible h2, .story-section.visible h2 {
+      color: #444;
+      animation: highlight 1s ease;
+    }
+    @keyframes highlight {
+      0% { color: #777; }
+      50% { color: #333; }
+      100% { color: #444; }
+    }
+    .pix-section p, .story-section p {
+      font-size: 1.1em;
+      color: #333;
+      margin: 15px 0;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .pix-section p:nth-child(odd), .story-section p:nth-child(odd) {
+      transform: translateX(-20px);
+    }
+    .pix-section p:nth-child(even), .story-section p:nth-child(even) {
+      transform: translateX(20px);
+    }
+    .pix-section.visible p, .story-section.visible p {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .pix-section p:nth-child(2) { transition-delay: 0.1s; }
+    .pix-section p:nth-child(3) { transition-delay: 0.2s; }
+    .story-section p:nth-child(2) { transition-delay: 0.1s; }
+    .story-section p:nth-child(3) { transition-delay: 0.2s; }
+    .pix-section p::before, .story-section p:first-child::before {
+      content: '\f004';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      margin-right: 10px;
+      color: #666;
+    }
+    .pix-section code {
+      background-color: #f0f0f0;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+    }
+    .footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #777;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .footer.visible {
+      opacity: 1;
+      transform: translateY(0);
+      animation: glow 2s ease-in-out infinite;
+    }
+    .footer p::before {
+      content: '\f015';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      margin-right: 10px;
+      color: #666;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 2px rgba(0, 0, 0, 0.1); }
+      50% { text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); }
+      100% { text-shadow: 0 0 2px rgba(0, 0, 0, 0.1); }
+    }
+    .divider {
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #666, transparent);
+      margin: 40px auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Celebração de Casa Nova</h1>
+      <h1>Welerson e Beatriz</h1>
+      <p>Junte-se a nós para celebrar o início da nossa nova jornada!</p>
+    </div>
+    <div class="buttons">
+      <a href="https://www.havan.com.br/eletro/?departamentosHV=" class="btn">Lista de Presentes</a>
+      <a href="#pix-section" class="btn">PIX</a>
+      <a href="#story-section" class="btn">História do Casal</a>
+    </div>
+    <div class="divider"></div>
+    <div id="pix-section" class="pix-section">
+      <h2>Contribuição via PIX</h2>
+      <p>Se preferir contribuir com um valor em dinheiro, aceitamos PIX!</p>
+      <p>Chave PIX: <code>123.456.789-00</code> (CPF)</p>
+      <p>Por favor, envie o comprovante para [contato@example.com] com o assunto "Celebração de Casa Nova".</p>
+    </div>
+    <div class="divider"></div>
+    <div id="story-section" class="story-section">
+      <h2>Nossa História</h2>
+      <p>Tudo começou em um dia ensolarado de primavera, quando nos conhecemos por acaso em uma livraria. Ele procurava um livro de poesia, ela folheava um romance. Uma conversa despretensiosa sobre literatura se transformou em horas de risadas e café. Desde então, compartilhamos sonhos, viagens e momentos inesquecíveis.</p>
+      <p>Agora, estamos prontos para construir nosso lar juntos, e cada passo dessa jornada é mais especial com o apoio de vocês. Obrigado por fazerem parte da nossa história!</p>
+    </div>
+    <div class="divider"></div>
+    <div class="footer">
+      <p>Com carinho, Welerson & Beatriz</p>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.pix-section, .story-section, .footer');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+</html>
